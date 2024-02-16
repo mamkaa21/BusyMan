@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,14 +29,14 @@ namespace BusyMan
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public ObservableCollection<NewTask> Taskes { get; set; }
-        public NewTask SelectedProducti
+        public NewTask SelectedNewTask
         {
             get => selectedNewTask;
             set
             {
                 selectedNewTask = value;
                 PropertyChanged?.Invoke(this,
-                    new PropertyChangedEventArgs(nameof(SelectedProducti)));
+                    new PropertyChangedEventArgs(nameof(SelectedNewTask)));
             }
         }
 
@@ -44,28 +46,26 @@ namespace BusyMan
             Taskes = new ObservableCollection<NewTask>();
             Taskes.Add(new NewTask
             {
-                Info = "Помидоры",
-                Speed = "1 кг",
+                InfoNew = "Помидоры",
+                SpeedNew = "1 кг"
             });
             DataContext = this;
         }
 
         public class NewTask
         {
-            public string Info { get; set; }
-            public string Speed{ get; set; }
+            public string InfoNew { get; set; } = " ";
+            public string SpeedNew { get; set; } = " ";
 
-            internal static void Add(NewTask newTask)
-            {
-                throw new NotImplementedException();
-            }
+
         }
 
         private void ButtonAdd(object sender, RoutedEventArgs e)
         {
-            NewTask.Add(new NewTask());
+            Taskes.Add(new NewTask());
             PropertyChanged?.Invoke(this,
-                    new PropertyChangedEventArgs(nameof(SelectedProducti)));
+                    new PropertyChangedEventArgs(nameof(SelectedNewTask)));
+            MessageBox.Show("Добавлено в список задач");
         }
     }
 }

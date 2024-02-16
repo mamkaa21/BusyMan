@@ -7,6 +7,29 @@
         mc:Ignorable="d"
         Title="HistoryWindow" Height="450" Width="800">
     <Grid>
-       
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="1" Grid.ColumnSpan="2" Content="История задач" HorizontalContentAlignment="Center" FontSize="26" VerticalAlignment="Center"/>
+        <ListBox Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding NewTask}"
+          SelectedItem="{Binding SelectedNewTask}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="{Binding Info}"/>
+                        <Label Content="{Binding Speed}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
